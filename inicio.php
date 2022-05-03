@@ -1,0 +1,87 @@
+<?php
+include_once("principal.php");
+
+    
+?>
+
+<?php
+	if(isset($_SESSION['mensagem'])){
+		echo $_SESSION['mensagem'];
+		unset($_SESSION['mensagem']);
+	}
+
+	$sqlrs= "SELECT * FROM tabela_estudante";
+	$resultado = mysqli_query($conectar,$sqlrs);
+	$numEstudantes = mysqli_num_rows($resultado);
+	$sqlrs1 = "SELECT * FROM Professor ORDER BY 'ID'";
+	$resultado1 = mysqli_query($conectar, $sqlrs1);
+	$numProfessores = mysqli_num_rows($resultado1);
+	$sqlrs2 = "SELECT * FROM Professor ORDER BY 'ID'";
+	$resultado2 = mysqli_query($conectar, $sqlrs2);
+	$numFuncionarios = mysqli_num_rows($resultado2);
+?>
+
+<div class="container-fluid" >
+    <div class="row-fluid">
+	<div class="col col-lg-H col-md-H col-sm-H haggy">
+            
+			<div class=" col-md-12">
+               	<div class="alert alert-info">
+    				<h1 align="center">Seja Bem Vindo</h1>
+					
+    				
+					 <center>
+    				 <strong><?php echo "".$_SESSION['usuarioNome'];?></strong> <br>
+    				 
+    				 </center>
+					 
+ 				</div>
+            </div>
+            <?php if($_SESSION['usuarioNivelAcesso']=='1' OR $_SESSION['usuarioNivelAcesso']=='5') {?>
+            <div class="col-md-4">
+               	<div class="alert alert-warning">
+    				<h2 align="center">Estudantes</h2>
+					
+    				
+					 <center>
+    				 <strong><?php echo "".$numEstudantes;?></strong> <br>
+    				 
+    				 </center>
+					 
+ 				</div>
+            </div>
+            <div class="col-md-4">
+               	<div class="alert alert-info">
+    				<h2 align="center">Professores</h2>
+					
+    				
+					 <center>
+    				 <strong><?php echo "".$numProfessores;?></strong> <br>
+    				 
+    				 </center>
+					 
+ 				</div>
+            </div>
+            <div class="col-md-4">
+               	<div class="alert alert-success">
+    				<h2 align="center">Funcionarios</h2>
+					
+    				
+					 <center>
+    				 <strong><?php echo "".$numFuncionarios;?></strong> <br>
+    				 
+    				 </center>
+					 
+ 				</div>
+            </div>
+            <?php } ?>
+    </div>
+	</div>
+</div>
+
+
+<?php
+	include_once("rodape.php");
+?>
+
+
